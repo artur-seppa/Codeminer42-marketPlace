@@ -33,6 +33,10 @@ export const runnerHooks: Required<Pick<Config, 'setup' | 'teardown'>> = {
   teardown: [],
 }
 
+export const reporters: Config['reporters'] = {
+  activated: ['spec']
+}
+
 /**
  * Configure suites by tapping into the test suite instance.
  * Learn more - https://japa.dev/docs/test-suites#lifecycle-hooks
