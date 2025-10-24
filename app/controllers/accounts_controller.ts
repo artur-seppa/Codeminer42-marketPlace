@@ -15,10 +15,19 @@ export default class AccountsController {
             }
 
             const account = await Account.create(payload)
-            return response.created(account)
+
+            const token = await Account.accessTokens.create(
+                account, 
+                ['*'],
+                {
+                    expiresIn: '1 day'
+                }
+            )
+
+            return response.created(token)
         } catch (error) {
             return response.internalServerError({ message: 'internal server error' });
-        } 
+        }
 
     }
 }
