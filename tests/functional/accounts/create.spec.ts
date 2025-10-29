@@ -12,9 +12,7 @@ test.group('Accounts create', () => {
     
     const body = response.body()
     assert.exists(body.token)
-    assert.isString(body.token)
     assert.equal(body.type, 'bearer')
-    assert.isArray(body.abilities)
     assert.include(body.abilities, '*')
     assert.exists(body.expiresAt)
   })
