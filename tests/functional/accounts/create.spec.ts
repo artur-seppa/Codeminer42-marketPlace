@@ -1,7 +1,7 @@
 import { test } from '@japa/runner'
 
-test.group('Account creation', () => {
-  test('should create an account successfully with valid data', async ({ client }) => {
+test.group('Accounts create', () => {
+  test('create an account successfully with valid data', async ({ client }) => {
     const response = await client.post('/accounts').json({
       name: 'John Doe',
       email: 'john@example.com',
@@ -15,7 +15,7 @@ test.group('Account creation', () => {
     })
   })
 
-  test('should not create account with invalid email', async ({ client }) => {
+  test('responds with an error when attempting to create an account with invalid email', async ({ client }) => {
     const response = await client.post('/accounts').json({
       name: 'John Doe',
       email: 'test',
@@ -25,7 +25,7 @@ test.group('Account creation', () => {
     response.assertStatus(422)
   })
 
-  test('should not create account with short password', async ({ client }) => {
+  test('responds with an error when attempting to create an account with short password', async ({ client }) => {
     const response = await client.post('/accounts').json({
       name: 'John Doe',
       email: 'john@example.com',
@@ -35,7 +35,7 @@ test.group('Account creation', () => {
     response.assertStatus(422)
   })
 
-  test('should not create account with empty name', async ({ client }) => {
+  test('responds with an error when attempting to create an account with empty name', async ({ client }) => {
     const response = await client.post('/accounts').json({
       name: '',
       email: 'john@example.com',
@@ -45,7 +45,7 @@ test.group('Account creation', () => {
     response.assertStatus(422)
   })
 
-  test('should not allow duplicate email', async ({ client }) => {
+  test('responds with an error when attempting to create an account with a email', async ({ client }) => {
     await client.post('/accounts').json({
       name: 'John Doe',
       email: 'john@example.com',
