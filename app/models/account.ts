@@ -18,6 +18,9 @@ export default class Account extends compose(BaseModel, AuthFinder) {
   declare name: string
 
   @column()
+  declare is_store_owner: boolean
+
+  @column()
   declare email: string
 
   @column({ serializeAs: null })

@@ -1,0 +1,33 @@
+import { DateTime } from 'luxon'
+import type { BelongsTo } from '@adonisjs/lucid/types/relations'
+import { BaseModel, column,  belongsTo } from '@adonisjs/lucid/orm'
+import Address from './address.js'
+
+export default class Store extends BaseModel {
+  @column({ isPrimary: true })
+  declare id: number
+
+  @column()
+  declare name: string
+
+  @column({ serializeAs: 'owner_id' })
+  declare owner_id: number
+
+  @column()
+  declare category: string
+
+  @column()
+  declare address_id: number
+
+  @belongsTo(() => Address, { 
+    foreignKey: 'address_id',
+    serializeAs: 'address'
+  })
+  declare address: BelongsTo<typeof Address>
+
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+}

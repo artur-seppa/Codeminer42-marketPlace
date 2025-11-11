@@ -5,6 +5,7 @@ export const AccountFactory = Factory.define(Account, ({ faker }) => {
   return {
     name: faker.person.fullName(),
     email: faker.internet.email(),
-    password: faker.internet.password({ length: 6 })
+    password: faker.internet.password({ length: 6 }),
+    is_store_owner: faker.datatype.boolean(),
   }
 }).build()

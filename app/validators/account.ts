@@ -9,6 +9,7 @@ export const createAccountValidator = vine.compile(
             .string()
             .trim(),
         email: vine.string().email(),
-        password: vine.string().minLength(6)
+        password: vine.string().minLength(6),
+        is_store_owner: vine.boolean().optional()
     })
 )

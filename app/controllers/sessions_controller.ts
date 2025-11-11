@@ -22,7 +22,13 @@ export default class SessionsController {
                 return response.badRequest({ message: 'Invalid credentials' });
             }
 
-            const token = await Account.accessTokens.create(account);
+            const token = await Account.accessTokens.create(
+                account, 
+                ['*'],
+                {
+                    expiresIn: '1 day'
+                }
+            )
 
             return response.ok(token);
         } catch (error) {
