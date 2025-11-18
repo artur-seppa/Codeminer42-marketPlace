@@ -2,21 +2,7 @@ import Store from '#models/store'
 import { test } from '@japa/runner'
 import { faker } from '@faker-js/faker'
 import Account from '#models/account'
-import { AccountFactory } from '#tests/factories/account_factory'
-import { ApiClient } from '@japa/api-client'
-
-async function createAndLoginStoreOwner(client: ApiClient) {
-  const password = faker.internet.password({ length: 6 })
-  const account = await AccountFactory.merge({ password: password, is_store_owner: true }).create()
-
-  const loginResponse = await client.post('/sessions').json({
-    email: account.email,
-    password,
-  })
-
-  const { token } = loginResponse.body()
-  return { token, account }
-}
+import { createAndLoginStoreOwner } from '../../util/login_store_owner.js'
 
 test.group('Stores create', (group) => {
   group.each.setup(async () => {
