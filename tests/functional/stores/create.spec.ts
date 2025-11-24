@@ -77,9 +77,15 @@ test.group('Stores create', (group) => {
       .header('Authorization', `Bearer ${token}`)
       .json(storeRepetedData);
 
-    response.assertStatus(400);
+    response.assertStatus(422);
     response.assertBodyContains({
-      message: "store name already exists"
+      errors: [
+        {
+          field: 'name',
+          rule: 'database.unique',
+          message: 'The name has already been taken',
+        },
+      ],
     })
   })
 })

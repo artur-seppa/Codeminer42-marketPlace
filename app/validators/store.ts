@@ -2,7 +2,7 @@ import vine from '@vinejs/vine'
 
 export const createStoreValidator = vine.compile(
   vine.object({
-    name: vine.string().trim().minLength(3),
+    name: vine.string().unique({ table: 'stores', column: 'name' }).trim().minLength(3),
     category: vine.string().trim(),
     address: vine.object({
       street: vine.string().trim().minLength(3),

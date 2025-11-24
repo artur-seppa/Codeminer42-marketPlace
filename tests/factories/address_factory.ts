@@ -1,5 +1,6 @@
 import Factory from '@adonisjs/lucid/factories'
 import Address from '#models/address'
+import { StoreFactory } from './store_factory.js'
 
 export const AddressFactory = Factory.define(Address, ({ faker }) => {
   return {
@@ -9,4 +10,6 @@ export const AddressFactory = Factory.define(Address, ({ faker }) => {
       zip_code: faker.location.zipCode(),
       complement: faker.location.secondaryAddress(),
     }
-}).build()
+})  
+.relation('store', () => StoreFactory)
+.build()

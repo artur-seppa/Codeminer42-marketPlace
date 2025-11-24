@@ -4,7 +4,7 @@ import { ApiClient } from '@japa/api-client'
 
 export async function createAndLoginStoreOwner(client: ApiClient) {
   const password = faker.internet.password({ length: 6 })
-  const account = await AccountFactory.merge({ password: password, is_store_owner: true }).create()
+  const account = await AccountFactory.merge({ password: password }).create()
 
   const loginResponse = await client.post('/sessions').json({
     email: account.email,

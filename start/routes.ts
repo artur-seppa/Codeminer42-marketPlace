@@ -17,7 +17,7 @@ const StoresController = () => import('#controllers/stores_controller')
 router.post('/accounts', [AccountsController, 'create']);
 router.post('/sessions', [SessionsController, 'login']);
 
-router.post('/stores', [StoresController, 'create']).use([middleware.auth(), middleware.authStoreOwner()]);
-router.get('/stores', [StoresController, 'list']).use([middleware.auth(), middleware.authStoreOwner()]);
-router.patch('/stores', [StoresController, 'patch']).use([middleware.auth(), middleware.authStoreOwner()]);
-router.delete('/stores/:store_id', [StoresController, 'delete']).use([middleware.auth(), middleware.authStoreOwner()]);
+router.post('/stores', [StoresController, 'create']).use([middleware.auth()]);
+router.get('/stores', [StoresController, 'list']).use([middleware.auth()]);
+router.patch('/stores', [StoresController, 'patch']).use([middleware.auth()]);
+router.delete('/stores/:store_id', [StoresController, 'delete']).use([middleware.auth()]);

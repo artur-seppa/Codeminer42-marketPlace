@@ -22,23 +22,6 @@ test.group('Accounts create', (group) => {
     assert.exists(body.expiresAt)
   })
 
-  test('create an store owner account successfully with valid data', async ({ client, assert }) => {
-    const response = await client.post('/accounts').json({
-      name: 'John Doe',
-      email: 'john@example.com',
-      password: '123456',
-      is_store_owner: true
-    })
-
-    response.assertStatus(201);
-    
-    const body = response.body()
-    assert.exists(body.token)
-    assert.equal(body.type, 'bearer')
-    assert.include(body.abilities, '*')
-    assert.exists(body.expiresAt)
-  })
-
   test('responds with an error when attempting to create an account with invalid email', async ({ client }) => {
     const response = await client.post('/accounts').json({
       name: 'John Doe',
@@ -97,26 +80,6 @@ test.group('Accounts create', (group) => {
         }
       ]
     });
-  })
-
-  test('responds with an error when attempting to create an account with invalid flag is_store_owner', async ({ client }) => {
-    const response = await client.post('/accounts').json({
-      name: 'John Doe',
-      email: 'john@example.com',
-      password: '123456',
-      is_store_owner: 'test'
-    })
-
-    response.assertStatus(422);
-    response.assertBodyContains({
-      errors: [
-        {
-          message: "The value must be a boolean",
-          rule: "boolean",
-          field: "is_store_owner"
-        }
-      ]
-    })
   })
 
   test('responds with an error when attempting to create an account with a email', async ({ client }) => {
