@@ -1,8 +1,13 @@
 import { AccountFactory } from '#tests/factories/account_factory'
 import { test } from '@japa/runner'
 import { faker } from '@faker-js/faker'
+import Account from '#models/account'
 
-test.group('Sessions login', () => {
+test.group('Sessions login', (group) => {
+    group.each.setup(async () => {
+        await Account.query().delete()
+    })
+    
     test('Login an account successfully with valid data', async ({ client, assert }) => {
         const password = faker.internet.password({ length: 6 })
         const account = await AccountFactory.merge({ password: password }).create()

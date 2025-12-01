@@ -1,7 +1,12 @@
+import Account from '#models/account'
 import { test } from '@japa/runner'
 
-test.group('Accounts create', () => {
-  test('create an account successfully with valid data', async ({ client, assert }) => {
+test.group('Accounts create', (group) => {
+  group.each.setup(async () => {
+    await Account.query().delete()
+  })
+
+  test('create an regular account successfully with valid data', async ({ client, assert }) => {
     const response = await client.post('/accounts').json({
       name: 'John Doe',
       email: 'john@example.com',
