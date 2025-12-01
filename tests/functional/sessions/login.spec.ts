@@ -2,9 +2,13 @@ import { AccountFactory } from '#tests/factories/account_factory'
 import { test } from '@japa/runner'
 import { faker } from '@faker-js/faker'
 import Account from '#models/account'
+import Product from '#models/product'
+import Store from '#models/store'
 
 test.group('Sessions login', (group) => {
     group.each.setup(async () => {
+        await Product.query().delete()
+        await Store.query().delete()
         await Account.query().delete()
     })
     
